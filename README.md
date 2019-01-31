@@ -5,7 +5,7 @@ EdgeEngine is StackPaths serverless platform. It allows you to add custom logic 
 
 [![Version](https://img.shields.io/npm/v/@stackpath/edgeengine-cli.svg)](https://www.npmjs.com/package/@stackpath/edgeengine-cli)
 [![Downloads/week](https://img.shields.io/npm/dw/@stackpath/edgeengine-cli.svg)](https://www.npmjs.com/package/@stackpath/edgeengine-cli)
-[![License](https://img.shields.io/npm/l/@stackpath/edgeengine-cli.svg)](https://github.com/stackpath/edgeengine-cli/blob/master/LICENSE)
+[![License](https://img.shields.io/npm/l/@stackpath/edgeengine-cli.svg?style=flat)](https://github.com/stackpath/edgeengine-cli/blob/master/LICENSE)
 
 # Introduction
 This CLI makes deploying to EdgeEngine as easy as running a single command. It's easy to use, but allows for a variety of use-cases. You can run the CLI locally to make deploying a whole lot quicker, run it in a CI/CD pipeline to automate the deployments or implement it in any way you can think of.
@@ -22,7 +22,7 @@ Depending on your platform and your own preferences there are a couple of ways t
 
 #### Installing through NPM
 
-`npm install -g edgeengine-cli` to install globally
+`npm install -g @stackpath/edgeengine-cli` to install globally
 
 #### Downloading the installer
 * For MacOS (.pkg) -> [Download](https://storage.googleapis.com/cli-dl/edgeengine-v1.0.0.pkg)
