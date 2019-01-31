@@ -1,12 +1,14 @@
 {
-  "name": "edgeengine",
-  "description": "Deploy to EdgeEngine from your local machine.",
+  "name": "@stackpath/edgeengine-cli",
+  "description": "Deploy to Stackpath EdgeEngine from your local machine.",
   "version": "1.0.0",
   "author": "Freave Netherlands <support@freave.com>",
   "bin": {
     "edgeengine": "./bin/run"
   },
-  "bugs": "https://github.com/freave/edgeengine/issues",
+  "bugs": {
+    "url": "https://github.com/stackpath/edgeengine-cli/issues"
+  },
   "dependencies": {
     "@oclif/command": "^1.5.8",
     "@oclif/config": "^1.10.4",
@@ -39,7 +41,7 @@
     "/npm-shrinkwrap.json",
     "/oclif.manifest.json"
   ],
-  "homepage": "https://github.com/freave/edgeengine",
+  "homepage": "https://github.com/stackpath/edgeengine-cli",
   "keywords": [
     "oclif"
   ],
@@ -56,7 +58,10 @@
       "sign": "Developer ID Installer: Ruben Gommers (ZHTMBF27Y3)"
     }
   },
-  "repository": "freave/edgeengine",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stackpath/edgeengine-cli.git"
+  },
   "scripts": {
     "generate:doc": "typedoc --out dist/docs src/ --mode modules",
     "lint": "tslint -c tslint.json 'src/**/*.ts'",
