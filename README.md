@@ -112,11 +112,11 @@ During the deployment the CLI might prompt you in certain situations. For exampl
 # Usage
 <!-- usage -->
 ```sh-session
-$ npm install -g edgeengine
+$ npm install -g @stackpath/edgeengine-cli
 $ edgeengine COMMAND
 running command...
 $ edgeengine (-v|--version|version)
-edgeengine/0.0.9 darwin-x64 node-v10.15.0
+@stackpath/edgeengine-cli/1.0.0 darwin-x64 node-v10.15.0
 $ edgeengine --help [COMMAND]
 USAGE
   $ edgeengine COMMAND
@@ -148,7 +148,7 @@ EXAMPLE
   $ edgeengine auth
 ```
 
-_See code: [src/commands/auth.ts](https://github.com/freave/edgeengine/blob/v0.0.9/src/commands/auth.ts)_
+_See code: [src/commands/auth.ts](https://github.com/stackpath/edgeengine-cli/blob/v1.0.0/src/commands/auth.ts)_
 
 ## `edgeengine deploy`
 
@@ -167,7 +167,7 @@ EXAMPLE
   $ edgeengine deploy
 ```
 
-_See code: [src/commands/deploy.ts](https://github.com/freave/edgeengine/blob/v0.0.9/src/commands/deploy.ts)_
+_See code: [src/commands/deploy.ts](https://github.com/stackpath/edgeengine-cli/blob/v1.0.0/src/commands/deploy.ts)_
 
 ## `edgeengine help [COMMAND]`
 
