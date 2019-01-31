@@ -3,9 +3,9 @@ EdgeEngine CLI
 
 EdgeEngine is StackPaths serverless platform. It allows you to add custom logic to your applications or even build entire applications on the edge. With a simple deploy your scripts are deployed to StackPaths vast network containing over 45 POP's. This CLI makes deploying as easy as running a single command. No matter the amount of scripts you have.
 
-[![Version](https://img.shields.io/npm/v/edgeengine.svg)](https://npmjs.org/package/edgeengine)
-[![Downloads/week](https://img.shields.io/npm/dw/edgeengine.svg)](https://npmjs.org/package/edgeengine)
-[![License](https://img.shields.io/npm/l/edgeengine.svg)](https://github.com/freave/edgeengine/blob/master/package.json)
+[![Version](https://img.shields.io/npm/v/@stackpath/edgeengine-cli.svg)](https://www.npmjs.com/package/@stackpath/edgeengine-cli)
+[![Downloads/week](https://img.shields.io/npm/dw/@stackpath/edgeengine-cli.svg)](https://www.npmjs.com/package/@stackpath/edgeengine-cli)
+[![License](https://img.shields.io/npm/l/@stackpath/edgeengine-cli.svg)](https://github.com/stackpath/edgeengine-cli/blob/master/LICENSE)
 
 # Introduction
 This CLI makes deploying to EdgeEngine as easy as running a single command. It's easy to use, but allows for a variety of use-cases. You can run the CLI locally to make deploying a whole lot quicker, run it in a CI/CD pipeline to automate the deployments or implement it in any way you can think of.
