@@ -180,3 +180,6 @@ OPTIONS
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v2.1.4/src/commands/help.ts)_
 <!-- commandsstop -->
+
+# Contributing
+We welcome contributions and pull requests to this plugin. See our [contributing guide](https://github.com/stackpath/edgeengine-cli/blob/master/.github/contributing.md) for more information.
