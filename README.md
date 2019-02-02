@@ -93,7 +93,7 @@ Here's an example:
 ### Where to find the stack and site ID?
 You can find the stack and site ID in the URL when you're logged into the StackPath client portal and have selected the CDN site you'd like to deploy scripts to. See the illustration below for more information on which IDs to copy.
 
-![How to find the IDs in the URL](https://freave.cdn.freavehd.net/com/cli-dl/ids.png)
+![How to find the IDs in the URL](https://cdn.developer.stackpath.com/assets/github.com/stackpath/edgeengine-cli/README.md/finding-stack-and-site-id.png)
 
 ## Deploying with the CLI
 When talking about deploying in the context of the EdgeEngine we mean getting local code onto the StackPath Edge. You might also call it "updating" or "pushing" code.
