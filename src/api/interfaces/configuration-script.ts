@@ -1,7 +1,7 @@
 export interface IConfigurationScript {
-    id: string;
-    name: string;
-    paths: string[];
-    file: string;
-    site_id?: string;
+  id: string;
+  name: string;
+  paths: string[];
+  file: string;
+  site_id?: string;
 }

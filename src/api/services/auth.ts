@@ -1,94 +1,98 @@
-import * as fs from 'fs';
-import * as os from 'os';
+import * as fs from "fs";
+import * as os from "os";
 
-import { ICredentials } from '../interfaces';
-import { STACKPATH_CREDENTIALSFILE_PATH, STACKPATH_CREDENTIALS_HOME } from '../constants';
-import { Http } from './http';
-import { Log } from './log';
+import { ICredentials } from "../interfaces";
+import {
+  STACKPATH_CREDENTIALSFILE_PATH,
+  STACKPATH_CREDENTIALS_HOME
+} from "../constants";
+import * as Http from "./http";
+import * as Log from "./log";
 
-/*
- * Namespace performing all Auth tasks.
+/**
+ * Returns configuration from the credentials file.
+ * @returns The contents of the credentials file if exists.
  */
-export namespace Auth {
-  /**
-   * Returns configuration from the credentials file.
-   * @returns The contents of the credentials file if exists.
-   */
-  export function getCredentials(): ICredentials {
-    let credentialsFileContents;
+export function getCredentials(): ICredentials {
+  let credentialsFileContents;
 
-    try {
-      credentialsFileContents = fs.readFileSync(`${os.homedir()}/${STACKPATH_CREDENTIALSFILE_PATH}`, 'utf8');
-    } catch (err) {
-      throw new Error('The StackPath CLI credentials file does not exist yet. Run `edgeengine auth` to create this.');
-    }
-
-    return JSON.parse(credentialsFileContents);
-  }
-
-  /**
-   * Saves the credentials file to disk.
-   * @param credentials - The credential object that needs to be saved to disk.
-   */
-  export function saveCredentials(credentials: ICredentials): void {
-    fs.writeFileSync(
+  try {
+    credentialsFileContents = fs.readFileSync(
       `${os.homedir()}/${STACKPATH_CREDENTIALSFILE_PATH}`,
-      JSON.stringify(credentials),
+      "utf8"
+    );
+  } catch (err) {
+    throw new Error(
+      "The StackPath CLI credentials file does not exist yet. Run `edgeengine auth` to create this."
     );
   }
 
-  /**
-   * Checks if a credentials file exists.
-   * @returns A boolean containing the value if the credentials file exists or not.
-   */
-  export function credentialsFileExists(): boolean {
-    return fs.existsSync(`${os.homedir()}/${STACKPATH_CREDENTIALSFILE_PATH}`);
+  return JSON.parse(credentialsFileContents);
+}
+
+/**
+ * Saves the credentials file to disk.
+ * @param credentials - The credential object that needs to be saved to disk.
+ */
+export function saveCredentials(credentials: ICredentials): void {
+  fs.writeFileSync(
+    `${os.homedir()}/${STACKPATH_CREDENTIALSFILE_PATH}`,
+    JSON.stringify(credentials)
+  );
+}
+
+/**
+ * Checks if a credentials file exists.
+ * @returns A boolean containing the value if the credentials file exists or not.
+ */
+export function credentialsFileExists(): boolean {
+  return fs.existsSync(`${os.homedir()}/${STACKPATH_CREDENTIALSFILE_PATH}`);
+}
+
+/**
+ * Creates the path to the credentials file if needed.
+ */
+export function createCredentialsPathIfNeeded(): void {
+  if (!fs.existsSync(`${os.homedir()}/${STACKPATH_CREDENTIALS_HOME}`)) {
+    Log.logVerbose(
+      `${os.homedir()}/${STACKPATH_CREDENTIALS_HOME} does not exist. Creating directory.`
+    );
+    fs.mkdirSync(`${os.homedir()}/${STACKPATH_CREDENTIALS_HOME}`);
   }
+}
 
-  /**
-   * Creates the path to the credentials file if needed.
-   */
-  export function createCredentialsPathIfNeeded(): void {
-    if (!fs.existsSync(`${os.homedir()}/${STACKPATH_CREDENTIALS_HOME}`)) {
-      Log.logVerbose(`${os.homedir()}/${STACKPATH_CREDENTIALS_HOME} does not exist. Creating directory.`);
-      fs.mkdirSync(`${os.homedir()}/${STACKPATH_CREDENTIALS_HOME}`);
-    }
-  }
+/**
+ * Gets an Access token from StackPath and save it to disk and returns it.
+ * @returns {Promise<string>} - The access_token that was the result of the oauth2 exchange.
+ */
+export async function getAccessToken(): Promise<string> {
+  const credentials = getCredentials();
 
-  /**
-   * Gets an Access token from StackPath and save it to disk and returns it.
-   * @returns {Promise<string>} - The access_token that was the result of the oauth2 exchange.
-   */
-  export async function getAccessToken(): Promise<string> {
-    const credentials = getCredentials();
+  const response = await Http.request("POST", "/identity/v1/oauth2/token", {
+    client_id: credentials.client_id,
+    client_secret: credentials.client_secret,
+    grant_type: "client_credentials"
+  });
 
-    const response = await Http.request('POST', '/identity/v1/oauth2/token', {
-      client_id: credentials.client_id,
-      client_secret: credentials.client_secret,
-      grant_type: 'client_credentials',
-    });
+  const body = await response.json();
 
-    const body = await response.json();
+  credentials.access_token = body.access_token;
+  credentials.access_token_expiry =
+    Math.round(new Date().getTime() / 1000) + body.expires_in;
 
-    credentials.access_token = body.access_token;
-    credentials.access_token_expiry =
-      Math.round(new Date().getTime() / 1000) + body.expires_in;
+  saveCredentials(credentials);
 
-    saveCredentials(credentials);
+  return body.access_token;
+}
 
-    return body.access_token;
-  }
+/**
+ * Check if current Access token is expired.
+ * @returns {Promise<boolean>} If true, the token has expired.
+ */
+export async function isAccessTokenExpired(): Promise<boolean> {
+  const credentials = getCredentials();
 
-  /**
-   * Check if current Access token is expired.
-   * @returns {Promise<boolean>} If true, the token has expired.
-   */
-  export async function isAccessTokenExpired(): Promise<boolean> {
-    const credentials = getCredentials();
-
-    return credentials.access_token
-      && credentials.access_token_expiry
-      ? (credentials.access_token_expiry < Math.round((new Date()).getTime() / 1000))
-      : true;
-  }
+  return credentials.access_token && credentials.access_token_expiry
+    ? credentials.access_token_expiry < Math.round(new Date().getTime() / 1000)
+    : true;
 }
