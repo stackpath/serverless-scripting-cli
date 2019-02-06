@@ -66,7 +66,7 @@ export default class Deploy extends Command {
     const deploy = new DeployService();
     try {
       await deploy.deployScripts({
-        force: !!process.env.STACKPATH_FORCE
+        force: Boolean(process.env.STACKPATH_FORCE)
       });
     } catch (e) {
       cliUx.log(e.message);

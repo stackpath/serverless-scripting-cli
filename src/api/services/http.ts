@@ -15,8 +15,7 @@ import * as Log from "./log";
 export async function request(
   method: string,
   resource: string,
-  body?: any,
-  throwErrors: boolean = true
+  body?: any
 ): Promise<NodeFetchResponse> {
   try {
     const response = await nodeFetch(`${STACKPATH_HOST}${resource}`, {
@@ -28,9 +27,9 @@ export async function request(
       body: body ? JSON.stringify(body) : undefined
     });
 
-    if (throwErrors) {
-      await handleResponseError(response, throwErrors);
-    }
+    Log.logVerbose(
+      `HTTP Request ${method} ${STACKPATH_HOST}${resource} ${response.status}`
+    );
 
     return response;
   } catch (error) {
@@ -38,27 +37,4 @@ export async function request(
       `An error occurred when connecting to StackPath host ${STACKPATH_HOST}.`
     );
   }
-}
-
-/**
- * Handles HTTP response and throws CLI error if needed.
- * @param response {Promise<Response>} - The response from node-fetch.
- * @returns {Promise<boolean>}
- */
-export async function handleResponseError(
-  response: NodeFetchResponse,
-  throwErrors: boolean = true
-): Promise<boolean> {
-  if (response.status !== 200) {
-    const error = await response.clone().json();
-    const errorMessage = `${error.message}. Original url ${response.url}`;
-    await Log.logError(errorMessage);
-    if (throwErrors) {
-      throw new Error(errorMessage);
-    }
-
-    return false;
-  }
-
-  return true;
 }
