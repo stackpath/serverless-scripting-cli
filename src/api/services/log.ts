@@ -13,24 +13,6 @@ export function logVerbose(log: string) {
   }
 }
 
-/**
- * Logs error to output and prompts user to continue or not.
- * @param {string} log - The string that needs to be logged to the output.
- */
-export async function logError(log: string) {
-  cliUx.log(log);
-  if (!!!process.env.STACKPATH_FORCE) {
-    const continueProcess = await cliUx.prompt(
-      `An error has occurred (${log}). Continue? y/n`
-    );
-
-    if (continueProcess !== "y") {
-      cliUx.log("Exiting...");
-      process.exit(1);
-    }
-  }
-}
-
 export enum LogLevel {
   VERBOSE = "verbose",
   INFO = "info"
