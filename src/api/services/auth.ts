@@ -39,6 +39,8 @@ export function saveCredentials(credentials: ICredentials): void {
     `${os.homedir()}/${STACKPATH_CREDENTIALSFILE_PATH}`,
     JSON.stringify(credentials)
   );
+
+  fs.chmodSync(`${os.homedir()}/${STACKPATH_CREDENTIALSFILE_PATH}`, "0600");
 }
 
 /**
