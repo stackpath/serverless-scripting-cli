@@ -7,3 +7,6 @@
 /yarn.lock
 node_modules
 .idea/*
+
+.DS_STORE
+**/.DS_STORE
