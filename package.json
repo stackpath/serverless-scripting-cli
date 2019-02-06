@@ -2,7 +2,7 @@
   "name": "@stackpath/edgeengine-cli",
   "description": "Deploy to Stackpath EdgeEngine from your local machine.",
   "version": "1.0.1",
-  "author": "Freave Netherlands <support@freave.com>",
+  "author": "The StackPath Development Team <developers@stackpath.com>",
   "bin": {
     "edgeengine": "./bin/run"
   },
@@ -48,7 +48,7 @@
   "keywords": [
     "oclif"
   ],
-  "license": "Apache-2.0",
+  "license": "MIT",
   "main": "lib/index.js",
   "oclif": {
     "commands": "./lib/commands",
