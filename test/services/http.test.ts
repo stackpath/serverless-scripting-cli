@@ -7,14 +7,14 @@ import { request } from "../../src/api/services/http";
 describe("service http", () => {
   test
     .nock(STACKPATH_HOST, MockHelper.mockDeployPost(false))
-    .it("should perform a http post call", () => {
-      request("POST", `/cdn/v1/stacks/1/sites/2/scripts`);
+    .it("should perform a http post call", async () => {
+      await request("POST", `/cdn/v1/stacks/1/sites/2/scripts`);
     });
 
   test
     .nock(STACKPATH_HOST, MockHelper.mockDeployPatch(false))
-    .it("should perform a http patch call", () => {
-      request("PATCH", `/cdn/v1/stacks/1/sites/2/scripts/3`);
+    .it("should perform a http patch call", async () => {
+      await request("PATCH", `/cdn/v1/stacks/1/sites/2/scripts/3`);
     });
 
   test
