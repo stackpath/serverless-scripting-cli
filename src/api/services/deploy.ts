@@ -99,7 +99,7 @@ export class Deploy {
     };
 
     const siteId = script.site_id || this.configuration.site_id;
-    const stackId = this.configuration.stack_id;
+    const stackId = script.stack_id || this.configuration.stack_id;
     const scriptId = script.id;
 
     if (scriptId) {
