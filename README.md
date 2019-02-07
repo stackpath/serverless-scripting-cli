@@ -90,7 +90,7 @@ Here's an example:
       ],
       "file": "edgeengine_scripts/demo.js",
       "site_id": "15ece821-9eed-4590-9577-b83beda947f7",
-      "site_id": "7be2de57-d6d9-4c27-8361-aef01e1870f0"
+      "stack_id": "7be2de57-d6d9-4c27-8361-aef01e1870f0"
     }
   ]
 }
