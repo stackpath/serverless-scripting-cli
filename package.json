@@ -1,7 +1,7 @@
 {
   "name": "@stackpath/edgeengine-cli",
   "description": "Deploy to Stackpath EdgeEngine from your local machine.",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "author": "The StackPath Development Team <developers@stackpath.com>",
   "bin": {
     "edgeengine": "./bin/run"
