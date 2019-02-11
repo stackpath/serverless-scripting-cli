@@ -19,21 +19,13 @@ describe("service http", () => {
 
   test
     .nock(STACKPATH_HOST, MockHelper.mockHttpError(false))
-    .it("should throw a http error", async () => {
-      try {
-        await request("POST", `/error`);
-      } catch (e) {
-        expect(e).to.exist;
-      }
-    });
-
-  test
-    .nock(STACKPATH_HOST, MockHelper.mockHttpError(false))
     .it("should not throw a http error", async () => {
+      let error = {};
       try {
-        await request("POST", `/error`, {}, false);
+        await request("POST", `/error`, {});
       } catch (e) {
-        expect(e).to.not.exist;
+        error = e;
       }
+      expect(error).to.be.a("Error");
     });
 });

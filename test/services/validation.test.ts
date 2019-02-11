@@ -1,6 +1,5 @@
-// tslint:disable newline-per-chained-call no-implicit-dependencies
-
 import { expect } from "chai";
+
 import { validateConfiguration } from "../../src/api/services/validation";
 import { IConfiguration, IConfigurationScript } from "../../src/api/interfaces";
 
@@ -34,21 +33,24 @@ describe("Validation, validateConfiguration", () => {
   });
 
   it("Should error if stack_id is missing", () => {
-    const invalidConfig = { ...validTestConfig, stack_id: undefined };
-    // @ts-ignore
-    expect(() => validateConfiguration(invalidConfig)).to.throw(/stack_id/);
+    const invalidConfig: any = { ...validTestConfig, stack_id: null };
+    expect(() =>
+      validateConfiguration(invalidConfig as IConfiguration)
+    ).to.throw(/stack_id/);
   });
 
   it("Should error if stack_id is missing", () => {
-    const invalidConfig = { ...validTestConfig, site_id: undefined };
-    // @ts-ignore
-    expect(() => validateConfiguration(invalidConfig)).to.throw(/site_id/);
+    const invalidConfig: any = { ...validTestConfig, site_id: undefined };
+    expect(() =>
+      validateConfiguration(invalidConfig as IConfiguration)
+    ).to.throw(/site_id/);
   });
 
   it("Should error if scripts is missing", () => {
-    const invalidConfig = { ...validTestConfig, scripts: undefined };
-    // @ts-ignore
-    expect(() => validateConfiguration(invalidConfig)).to.throw(/scripts/);
+    const invalidConfig: any = { ...validTestConfig, scripts: undefined };
+    expect(() =>
+      validateConfiguration(invalidConfig as IConfiguration)
+    ).to.throw(/scripts/);
   });
 
   it("Should error if scripts is not an array", () => {
@@ -64,19 +66,15 @@ describe("Validation, validateConfiguration", () => {
    */
   it("Should error if a script name is missing", () => {
     const invalidScripts = deepCloneArray(validScripts);
-    // @ts-ignore
     invalidScripts[0].name = undefined;
     const invalidConfig = { ...validTestConfig, scripts: invalidScripts };
-    // @ts-ignore
     expect(() => validateConfiguration(invalidConfig)).to.throw(/script.*name/);
   });
 
   it("Should error if a script paths property is missing", () => {
     const invalidScripts = deepCloneArray(validScripts);
-    // @ts-ignore
     invalidScripts[0].paths = undefined;
     const invalidConfig = { ...validTestConfig, scripts: invalidScripts };
-    // @ts-ignore
     expect(() => validateConfiguration(invalidConfig)).to.throw(
       /script.*paths/
     );
@@ -84,10 +82,8 @@ describe("Validation, validateConfiguration", () => {
 
   it("Should error if a script paths property is an empty array", () => {
     const invalidScripts = deepCloneArray(validScripts);
-    // @ts-ignore
     invalidScripts[0].paths = [];
     const invalidConfig = { ...validTestConfig, scripts: invalidScripts };
-    // @ts-ignore
     expect(() => validateConfiguration(invalidConfig)).to.throw(
       /script.*at least one path/
     );
@@ -95,10 +91,8 @@ describe("Validation, validateConfiguration", () => {
 
   it("Should error if a script file property is undefined", () => {
     const invalidScripts = deepCloneArray(validScripts);
-    // @ts-ignore
     invalidScripts[0].file = undefined;
     const invalidConfig = { ...validTestConfig, scripts: invalidScripts };
-    // @ts-ignore
     expect(() => validateConfiguration(invalidConfig)).to.throw(
       /script.*not contain.*its file/
     );
@@ -106,10 +100,8 @@ describe("Validation, validateConfiguration", () => {
 
   it("Should error if a script file property is an empty string", () => {
     const invalidScripts = deepCloneArray(validScripts);
-    // @ts-ignore
     invalidScripts[0].file = "";
     const invalidConfig = { ...validTestConfig, scripts: invalidScripts };
-    // @ts-ignore
     expect(() => validateConfiguration(invalidConfig)).to.throw(
       /script.*not contain.*its file/
     );
@@ -117,10 +109,8 @@ describe("Validation, validateConfiguration", () => {
 
   it("Should error if a script file property points to a non-existing file", () => {
     const invalidScripts = deepCloneArray(validScripts);
-    // @ts-ignore
     invalidScripts[0].file = "a-very-nonexisting-file.extension";
     const invalidConfig = { ...validTestConfig, scripts: invalidScripts };
-    // @ts-ignore
     expect(() => validateConfiguration(invalidConfig)).to.throw(
       /file.*not be found/
     );
