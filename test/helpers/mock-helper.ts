@@ -150,15 +150,15 @@ export const mockFileSystem = () => {
 
 export const restoreFileSystem = () => {
   if (typeof (fs.writeFileSync as any)["restore"] === "function") {
-    (fs.writeFileSync as sinon.SinonStub)["restore"]();
+    (fs.writeFileSync as sinon.SinonStub).restore();
   }
   if (typeof (fs.readFileSync as any)["restore"] === "function") {
-    (fs.readFileSync as sinon.SinonStub)["restore"]();
+    (fs.readFileSync as sinon.SinonStub).restore();
   }
   if (typeof (fs.existsSync as any)["restore"] === "function") {
-    (fs.existsSync as sinon.SinonStub)["restore"]();
+    (fs.existsSync as sinon.SinonStub).restore();
   }
   if (typeof (fs.chmodSync as any)["restore"] === "function") {
-    (fs.chmodSync as sinon.SinonStub)["restore"]();
+    (fs.chmodSync as sinon.SinonStub).restore();
   }
 };
