@@ -19,17 +19,17 @@ This CLI makes deploying to EdgeEngine as easy as running a single command. It's
 
 ## Installing the CLI
 
-Depending on your platform and your own preferences there are a couple of ways to get the CLI. The preferred way is probably to install it through NPM.
+Depending on your platform and preferences there are a couple of ways to get the CLI.
 
 ### Installing through NPM
 
-`npm install -g @stackpath/edgeengine-cli` to install globally
+Run `npm install -g @stackpath/edgeengine-cli` to install `edgeengine` as a global package.
 
-### Downloading the installer
+### Installing through Homebrew or Linuxbrew
 
-- For MacOS (.pkg) -> [Download](https://storage.googleapis.com/cli-dl/edgeengine-v1.0.0.pkg)
-- For Windows (.exe) -> Download
-- For Ubuntu (.deb) -> Download
+StackPath maintains a [Homebrew tap](https://github.com/stackpath/homebrew-stackpath) for users to access utilities through the popular [Homebrew](https://brew.sh/) and [Linuxbrew](https://docs.brew.sh/Linuxbrew) package managers for macOS and Linux.
+
+Run `brew tap stackpath/stackpath` to install the tap, then run `brew install edgeengine` to install the `edgeengine` utility.
 
 ## Setting authentication details
 
