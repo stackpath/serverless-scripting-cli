@@ -1,6 +1,6 @@
 import { expect, test } from "@oclif/test";
 
-import { MockHelper } from "../helpers/mock-helper";
+import * as MockHelper from "../helpers/mock-helper";
 import { STACKPATH_HOST } from "../../src/api/constants";
 import { request } from "../../src/api/services/http";
 

@@ -1,7 +1,7 @@
 import { test } from "@oclif/test";
 
 import { Deploy } from "../../src/api/services/deploy";
-import { MockHelper } from "../helpers/mock-helper";
+import * as MockHelper from "../helpers/mock-helper";
 import { STACKPATH_HOST } from "../../src/api/constants";
 
 describe("service deploy", () => {

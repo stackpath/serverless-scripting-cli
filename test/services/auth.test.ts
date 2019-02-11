@@ -7,7 +7,7 @@ import {
   credentialsFileExists,
   isAccessTokenExpired
 } from "../../src/api/services/auth";
-import { MockHelper } from "../helpers/mock-helper";
+import * as MockHelper from "../helpers/mock-helper";
 import { STACKPATH_HOST } from "../../src/api/constants";
 
 describe("service auth", () => {

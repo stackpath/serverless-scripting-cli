@@ -1,7 +1,7 @@
 import { expect, test } from "@oclif/test";
 import * as sinon from "sinon";
 
-import { MockHelper } from "../helpers/mock-helper";
+import * as MockHelper from "../helpers/mock-helper";
 import { Deploy as DeployService } from "../../src/api/services/deploy";
 import { STACKPATH_HOST } from "../../src/api/constants";
 

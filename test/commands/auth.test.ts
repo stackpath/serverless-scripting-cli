@@ -3,7 +3,7 @@ import cliUx from "cli-ux";
 import * as sinon from "sinon";
 
 import { STACKPATH_HOST } from "../../src/api/constants";
-import { MockHelper } from "../helpers/mock-helper";
+import * as MockHelper from "../helpers/mock-helper";
 import * as Auth from "../../src/api/services/auth";
 
 describe("command auth", () => {
