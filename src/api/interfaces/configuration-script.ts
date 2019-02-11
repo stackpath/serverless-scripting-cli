@@ -4,4 +4,5 @@ export interface IConfigurationScript {
   paths: string[];
   file: string;
   site_id?: string;
+  stack_id?: string;
 }

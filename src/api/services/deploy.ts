@@ -1,12 +1,11 @@
 import * as fs from "fs";
 import cliUx from "cli-ux";
-import { Response as NodeFetchResponse } from "node-fetch";
-
 import { IConfiguration, IConfigurationScript } from "../interfaces";
 import { STACKPATH_CONFIGFILE_PATH } from "../constants";
 import * as Validation from "./validation";
 import * as Http from "./http";
 import * as Log from "./log";
+import { continueOnErrorPrompt } from "./prompt";
 
 /*
  * Class performing all Deploy tasks.
@@ -52,13 +51,15 @@ export class Deploy {
     cliUx.action.start("Deploying scripts...");
 
     try {
-      await this.configuration.scripts.reduce(
-        async (previousPromise, nextScript, index) => {
-          await previousPromise;
-          return this.handleScriptUpload(nextScript, index);
-        },
-        Promise.resolve()
-      );
+      for (let i = 0; i < this.configuration.scripts.length; i++) {
+        try {
+          const script = this.configuration.scripts[i];
+          await this.handleScriptUpload(script, i);
+        } catch (e) {
+          // Check if user wants to try to update subsequent scripts after an error
+          await continueOnErrorPrompt(e);
+        }
+      }
 
       Log.logVerbose(
         `Saving new configuration file to ${STACKPATH_CONFIGFILE_PATH}`
@@ -97,27 +98,26 @@ export class Deploy {
       code: scriptContentBase64
     };
 
-    const siteId =
-      script.hasOwnProperty("site_id") && script.site_id !== ""
-        ? script.site_id
-        : this.configuration.site_id;
-    if (script.hasOwnProperty("id") && script.id !== "") {
+    const siteId = script.site_id || this.configuration.site_id;
+    const stackId = script.stack_id || this.configuration.stack_id;
+    const scriptId = script.id;
+
+    if (scriptId) {
       Log.logVerbose(
-        `Updating script ${script.name} with id ${script.id} to site ${siteId}.`
+        `Updating script ${script.name} with id ${scriptId} to site ${siteId}.`
       );
 
       const response = await Http.request(
         "PATCH",
-        `/cdn/v1/stacks/${
-          this.configuration.stack_id
-        }/sites/${siteId}/scripts/${script.id}`,
-        body,
-        false
+        `/cdn/v1/stacks/${stackId}/sites/${siteId}/scripts/${script.id}`,
+        body
       );
 
-      const json = await response.clone().json();
+      const respBody: ScriptResponse = await response.json();
 
-      if (response.status === 404 && json.code === 5) {
+      if (response.ok && respBody.script) {
+        cliUx.log(`Successfully updated script ${script.name}`);
+      } else if (response.status === 404 && respBody.code === 5) {
         // code 5 means Site script does not exist.
         Log.logVerbose(`Script ${script.name} does not exist (anymore).`);
         let recreateScript = this.force;
@@ -130,38 +130,42 @@ export class Deploy {
           );
         }
         if (recreateScript) {
-          Log.logVerbose(`Will recreate script ${script.name}.`);
-          script.id = "";
-        } else {
-          if (await Http.handleResponseError(response, false)) {
-            await this.updateScriptWithResponse(script, response, index);
-          } else {
-            throw new Error("Operation canceled.");
-          }
-        }
-      } else {
-        if (await Http.handleResponseError(response, false)) {
-          await this.updateScriptWithResponse(script, response, index);
+          await this.createScript({ script, siteId, body, index });
         } else {
           throw new Error("Operation canceled.");
         }
+      } else {
+        throw new Error(`Update Script Request failed ${respBody.message}`);
       }
+    } else {
+      await this.createScript({ script, siteId, body, index });
     }
+  }
 
-    if (!script.hasOwnProperty("id") || script.id === "") {
-      Log.logVerbose(`Creating script ${script.name} for site ${siteId}.`);
+  private async createScript(options: {
+    script: IConfigurationScript;
+    siteId: string;
+    body: object;
+    index: number;
+  }) {
+    const { script, siteId, body, index } = options;
+    Log.logVerbose(`Creating script ${script.name} for site ${siteId}.`);
 
-      const response = await Http.request(
-        "POST",
-        `/cdn/v1/stacks/${this.configuration.stack_id}/sites/${siteId}/scripts`,
-        body
-      );
-      Log.logVerbose(
-        `HTTP Response for script ${script.name}: ${response.status}`
-      );
+    const response = await Http.request(
+      "POST",
+      `/cdn/v1/stacks/${this.configuration.stack_id}/sites/${siteId}/scripts`,
+      body
+    );
+    Log.logVerbose(
+      `HTTP Response for script ${script.name}: ${response.status}`
+    );
 
-      await this.updateScriptWithResponse(script, response, index);
+    const respBody: ScriptResponse = await response.json();
+
+    if (!response.ok || !respBody.script) {
+      throw new Error(`Failed to create script (${respBody.message})`);
     }
+    await this.updateScriptIdInConfig(script, respBody.script.id, index);
   }
 
   /**
@@ -170,19 +174,20 @@ export class Deploy {
    * @param {Response} response - The response that contains the (new) id.
    * @param {number} index - The index of the script.
    */
-  private async updateScriptWithResponse(
+  private async updateScriptIdInConfig(
     script: IConfigurationScript,
-    response: NodeFetchResponse,
+    scriptId: string,
     index: number
   ) {
-    if (response !== undefined) {
-      const json = await response.clone().json();
-      if (json) {
-        Log.logVerbose(
-          `Saving id for created script ${script.name} to ${json.script.id}`
-        );
-        this.configuration.scripts[index].id = json.script.id;
-      }
-    }
+    Log.logVerbose(
+      `Saving id for created script ${script.name} to ${scriptId}`
+    );
+    this.configuration.scripts[index].id = scriptId;
   }
+}
+
+interface ScriptResponse {
+  script?: { id: string };
+  code?: number;
+  message?: string;
 }

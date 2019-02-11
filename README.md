@@ -19,9 +19,17 @@ This CLI makes deploying to EdgeEngine as easy as running a single command. It's
 
 ## Installing the CLI
 
-You can easily install the EdgeEngine CLI using NPM, just make sure you've got [NodeJS](https://nodejs.org/en/) installed.
+Depending on your platform and your own preferences there are a couple of ways to get the CLI. The preferred way is probably to install it through NPM.
 
-> 👉 Run `npm install -g @stackpath/edgeengine-cli` to install globally
+### Installing through NPM
+
+`npm install -g @stackpath/edgeengine-cli` to install globally
+
+### Downloading the installer
+
+- For MacOS (.pkg) -> [Download](https://storage.googleapis.com/cli-dl/edgeengine-v1.0.0.pkg)
+- For Windows (.exe) -> Download
+- For Ubuntu (.deb) -> Download
 
 ## Setting authentication details
 
@@ -74,6 +82,15 @@ Here's an example:
       ],
       "file": "edgeengine_scripts/demo.js",
       "site_id": "15ece821-9eed-4590-9577-b83beda947f7"
+    },
+    {
+      "name": "Script to show a deploy to a different site and stack",
+      "paths": [
+        "demo/*"
+      ],
+      "file": "edgeengine_scripts/demo.js",
+      "site_id": "15ece821-9eed-4590-9577-b83beda947f7",
+      "stack_id": "7be2de57-d6d9-4c27-8361-aef01e1870f0"
     }
   ]
 }

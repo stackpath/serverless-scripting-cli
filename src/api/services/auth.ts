@@ -1,6 +1,6 @@
 import * as fs from "fs";
 import * as os from "os";
-
+import cliUx from "cli-ux";
 import { ICredentials } from "../interfaces";
 import {
   STACKPATH_CREDENTIALSFILE_PATH,
@@ -76,6 +76,14 @@ export async function getAccessToken(): Promise<string> {
   });
 
   const body = await response.json();
+
+  // Exit if cannot retrieve an access token
+  if (!response.ok) {
+    cliUx.log(
+      `An error occurred trying to retrieve an access token: ${body.message}`
+    );
+    process.exit(1);
+  }
 
   credentials.access_token = body.access_token;
   credentials.access_token_expiry =
