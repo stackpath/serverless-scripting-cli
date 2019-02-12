@@ -6,19 +6,19 @@ import { STACKPATH_CONFIGFILE_PATH } from "../constants";
  * Validates the configuration file and throws errors if contains invalid values.
  */
 export function validateConfiguration(configuration: IConfiguration): void {
-  if (!configuration.hasOwnProperty("stack_id")) {
+  if (!configuration.stack_id) {
     throw new Error(
       `Missing required property 'stack_id' in your ${STACKPATH_CONFIGFILE_PATH} file.`
     );
   }
 
-  if (!configuration.hasOwnProperty("site_id")) {
+  if (!configuration.site_id) {
     throw new Error(
       `Missing required property 'site_id' in your ${STACKPATH_CONFIGFILE_PATH} file.`
     );
   }
 
-  if (!configuration.hasOwnProperty("scripts")) {
+  if (!configuration.scripts) {
     throw new Error(
       `Missing required property 'scripts' in your ${STACKPATH_CONFIGFILE_PATH} file.`
     );
@@ -29,11 +29,11 @@ export function validateConfiguration(configuration: IConfiguration): void {
   }
 
   configuration.scripts.forEach((script: IConfigurationScript) => {
-    if (!script.hasOwnProperty("name") || script.name === "") {
+    if (!script.name || script.name === "") {
       throw new Error("At least one script is missing a valid name.");
     }
 
-    if (!script.hasOwnProperty("paths")) {
+    if (!script.paths) {
       throw new Error(
         `The script with name '${script.name}' does not have a paths property.`
       );
@@ -47,7 +47,7 @@ export function validateConfiguration(configuration: IConfiguration): void {
       );
     }
 
-    if (!script.hasOwnProperty("file") || script.file === "") {
+    if (!script.file || script.file === "") {
       throw new Error(
         `The script with name '${
           script.name
