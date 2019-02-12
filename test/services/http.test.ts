@@ -26,6 +26,6 @@ describe("service http", () => {
       } catch (e) {
         error = e;
       }
-      expect(error).to.be.a("Error");
+      expect(error).to.be.undefined;
     });
 });
