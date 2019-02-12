@@ -20,7 +20,7 @@ describe("service http", () => {
   test
     .nock(STACKPATH_HOST, MockHelper.mockHttpError(false))
     .it("should not throw a http error", async () => {
-      let error = {};
+      let error: Error | undefined;
       try {
         await request("POST", `/error`, {});
       } catch (e) {
