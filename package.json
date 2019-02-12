@@ -55,11 +55,7 @@
     "bin": "edgeengine",
     "plugins": [
       "@oclif/plugin-help"
-    ],
-    "macos": {
-      "identifier": "com.stackpath.edgeengine-cli",
-      "sign": "Developer ID Installer: Ruben Gommers (ZHTMBF27Y3)"
-    }
+    ]
   },
   "repository": {
     "type": "git",
