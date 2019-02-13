@@ -5,6 +5,7 @@ EdgeEngine is StackPath's serverless platform. It allows you to add custom logic
 [![Version](https://img.shields.io/npm/v/@stackpath/edgeengine-cli.svg)](https://www.npmjs.com/package/@stackpath/edgeengine-cli)
 [![Downloads/week](https://img.shields.io/npm/dw/@stackpath/edgeengine-cli.svg)](https://www.npmjs.com/package/@stackpath/edgeengine-cli)
 [![License](https://img.shields.io/npm/l/@stackpath/edgeengine-cli.svg?style=flat)](https://github.com/stackpath/edgeengine-cli/blob/master/LICENSE.md)
+[![Build Status](https://travis-ci.org/stackpath/edgeengine-cli.svg)](https://travis-ci.org/stackpath/edgeengine-cli)
 
 # Introduction
 
