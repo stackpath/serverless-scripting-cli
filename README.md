@@ -5,6 +5,7 @@ EdgeEngine is StackPath's serverless platform. It allows you to add custom logic
 [![Version](https://img.shields.io/npm/v/@stackpath/edgeengine-cli.svg)](https://www.npmjs.com/package/@stackpath/edgeengine-cli)
 [![Downloads/week](https://img.shields.io/npm/dw/@stackpath/edgeengine-cli.svg)](https://www.npmjs.com/package/@stackpath/edgeengine-cli)
 [![License](https://img.shields.io/npm/l/@stackpath/edgeengine-cli.svg?style=flat)](https://github.com/stackpath/edgeengine-cli/blob/master/LICENSE.md)
+[![Build Status](https://travis-ci.org/stackpath/edgeengine-cli.svg)](https://travis-ci.org/stackpath/edgeengine-cli)
 
 # Introduction
 
@@ -24,6 +25,10 @@ Depending on your platform and preferences there are a couple of ways to get the
 ### Installing through NPM
 
 Run `npm install -g @stackpath/edgeengine-cli` to install `edgeengine` as a global package.
+
+### Installing through Yarn
+
+Run `yarn global add @stackpath/edgeengine-cli` to install `edgeengine` as a global package.
 
 ### Installing through Homebrew or Linuxbrew
 
