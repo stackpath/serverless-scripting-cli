@@ -26,6 +26,10 @@ Depending on your platform and preferences there are a couple of ways to get the
 
 Run `npm install -g @stackpath/edgeengine-cli` to install `edgeengine` as a global package.
 
+### Installing through Yarn
+
+Run `yarn global add @stackpath/edgeengine-cli` to install `edgeengine` as a global package.
+
 ### Installing through Homebrew or Linuxbrew
 
 StackPath maintains a [Homebrew tap](https://github.com/stackpath/homebrew-stackpath) for users to access utilities through the popular [Homebrew](https://brew.sh/) and [Linuxbrew](https://docs.brew.sh/Linuxbrew) package managers for macOS and Linux.
