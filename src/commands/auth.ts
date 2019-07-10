@@ -9,13 +9,13 @@ import * as Log from "../api/services/log";
 const LogLevel = Log.LogLevel;
 
 /**
- * Class performing the auth command '$ edgeengine auth'.
+ * Class performing the auth command '$ sp-serverless auth'.
  */
 export default class Auth extends Command {
   public static description: string =
     "Configures StackPath's authentication details.";
 
-  public static examples: string[] = [`$ edgeengine auth`];
+  public static examples: string[] = [`$ sp-serverless auth`];
 
   public static flags: flags.Input<any> = {
     client_id: flags.string({

@@ -10,12 +10,12 @@ import * as Log from "../api/services/log";
 const LogLevel = Log.LogLevel;
 
 /**
- * Class performing the deployment command '$ edgeengine deploy'.
+ * Class performing the deployment command '$ sp-serverless deploy'.
  */
 export default class Deploy extends Command {
   public static description: string = `Deploys the scripts in the working directory according to its ${STACKPATH_CONFIGFILE_PATH} configuration file.`;
 
-  public static examples: string[] = [`$ edgeengine deploy`];
+  public static examples: string[] = [`$ sp-serverless deploy`];
 
   public static flags: flags.Input<any> = {
     help: flags.help({ char: "h" }),

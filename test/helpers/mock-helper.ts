@@ -95,27 +95,27 @@ export const mockFileSystem = () => {
                         "paths": [
                             "test/*"
                         ],
-                        "file": "edgeengine/test.js",
+                        "file": "serverless/test.js",
                         "id": "3"
                     }, {
                         "name": "New test script",
                         "paths": [
                             "new_test/*"
                         ],
-                        "file": "edgeengine/new_test.js"
+                        "file": "serverless/new_test.js"
                     }
                 ]
             }`;
     });
 
   (fs.readFileSync as sinon.SinonStub)
-    .withArgs(`${process.cwd()}/edgeengine/test.js`, "utf8")
+    .withArgs(`${process.cwd()}/serverless/test.js`, "utf8")
     .callsFake(() => {
       return `console.log("This is a StackPath test script.");`;
     });
 
   (fs.readFileSync as sinon.SinonStub)
-    .withArgs(`${process.cwd()}/edgeengine/new_test.js`, "utf8")
+    .withArgs(`${process.cwd()}/serverless/new_test.js`, "utf8")
     .callsFake(() => {
       return `console.log("This is a StackPath test script.");`;
     });
@@ -136,12 +136,12 @@ export const mockFileSystem = () => {
       return true;
     });
   (fs.existsSync as sinon.SinonStub)
-    .withArgs(`${process.cwd()}/edgeengine/test.js`)
+    .withArgs(`${process.cwd()}/serverless/test.js`)
     .callsFake(() => {
       return true;
     });
   (fs.existsSync as sinon.SinonStub)
-    .withArgs(`${process.cwd()}/edgeengine/new_test.js`)
+    .withArgs(`${process.cwd()}/serverless/new_test.js`)
     .callsFake(() => {
       return true;
     });

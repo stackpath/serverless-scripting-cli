@@ -41,7 +41,9 @@ export class Deploy {
       Log.logVerbose(`Parsing ${STACKPATH_CONFIGFILE_PATH} file contents.`);
       this.configuration = JSON.parse(configurationFileContents);
     } catch (err) {
-      throw new Error("The .edgeengine.json file does not contain valid JSON.");
+      throw new Error(
+        "The sp-serverless.json file does not contain valid JSON."
+      );
     }
 
     // Asserts that the configuration file is valid and can be used.
