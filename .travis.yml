@@ -6,6 +6,11 @@ node_js:
   - "11"
   - "12"
 
+matrix:
+  allow_failures:
+    # get-caller-file@2.0.5 is incompatible with node 9
+    - node_js: "9"
+
 script:
   - yarn lint
   - yarn test
