@@ -1,15 +1,22 @@
-# EdgeEngine CLI
+# Serverless Scripting CLI
 
-EdgeEngine is StackPath's serverless platform. It allows you to add custom logic to your applications or even build entire applications on the edge. With a simple deploy your scripts are deployed to StackPath's vast network containing over 45 POP's. This CLI makes deploying as easy as running a single command, no matter the amount of scripts you have.
+StackPath's serverless scripting platform allows you to add custom logic to your
+applications or even build entire applications on the edge. With a simple deploy
+your scripts are deployed to StackPath's vast network containing over 45 POP's.
+This CLI makes deploying as easy as running a single command, no matter the
+amount of scripts you have.
 
-[![Version](https://img.shields.io/npm/v/@stackpath/edgeengine-cli.svg)](https://www.npmjs.com/package/@stackpath/edgeengine-cli)
-[![Downloads/week](https://img.shields.io/npm/dw/@stackpath/edgeengine-cli.svg)](https://www.npmjs.com/package/@stackpath/edgeengine-cli)
-[![License](https://img.shields.io/npm/l/@stackpath/edgeengine-cli.svg?style=flat)](https://github.com/stackpath/edgeengine-cli/blob/master/LICENSE.md)
-[![Build Status](https://travis-ci.org/stackpath/edgeengine-cli.svg)](https://travis-ci.org/stackpath/edgeengine-cli)
+[![Version](https://img.shields.io/npm/v/@stackpath/serverless-scripting-cli.svg)](https://www.npmjs.com/package/@stackpath/serverless-scripting-cli)
+[![Downloads/week](https://img.shields.io/npm/dw/@stackpath/serverless-scripting-cli.svg)](https://www.npmjs.com/package/@stackpath/serverless-scripting-cli)
+[![License](https://img.shields.io/npm/l/@stackpath/serverless-scripting-cli.svg?style=flat)](https://github.com/stackpath/serverless-scripting-cli/blob/master/LICENSE.md)
+[![Build Status](https://travis-ci.org/stackpath/serverless-scripting-cli.svg)](https://travis-ci.org/stackpath/serverless-scripting-cli)
 
 # Introduction
 
-This CLI makes deploying to EdgeEngine as easy as running a single command. It's easy to use, but allows for a variety of use-cases. You can run the CLI locally to make deploying a whole lot quicker, run it in a CI/CD pipeline to automate the deployments, or implement it in any way you can think of.
+This CLI makes deploying to the serverless scripting platform as easy as running
+a single command. It's easy to use, but allows for a variety of use-cases. You
+can run the CLI locally to make deploying a whole lot quicker, run it in a CI/CD
+pipeline to automate the deployments, or implement it in any way you can think of.
 
 **How to get started?**
 
@@ -20,49 +27,70 @@ This CLI makes deploying to EdgeEngine as easy as running a single command. It's
 
 ## Installing the CLI
 
-Depending on your platform and preferences there are a couple of ways to get the CLI.
+Depending on your platform and preferences there are a couple of ways to get the
+CLI.
 
 ### Installing through NPM
 
-Run `npm install -g @stackpath/edgeengine-cli` to install `edgeengine` as a global package.
+Run `npm install -g @stackpath/serverless-scripting-cli` to install `sp-serverless`
+as a global package.
 
 ### Installing through Yarn
 
-Run `yarn global add @stackpath/edgeengine-cli` to install `edgeengine` as a global package.
+Run `yarn global add @stackpath/serverless-scripting-cli` to install `sp-serverless`
+as a global package.
 
 ### Installing through Homebrew or Linuxbrew
 
-StackPath maintains a [Homebrew tap](https://github.com/stackpath/homebrew-stackpath) for users to access utilities through the popular [Homebrew](https://brew.sh/) and [Linuxbrew](https://docs.brew.sh/Linuxbrew) package managers for macOS and Linux.
+StackPath maintains a [Homebrew tap](https://github.com/stackpath/homebrew-stackpath)
+for users to access utilities through the popular [Homebrew](https://brew.sh/)
+and [Linuxbrew](https://docs.brew.sh/Linuxbrew) package managers for macOS and
+Linux.
 
-Run `brew tap stackpath/stackpath` to install the tap, then run `brew install edgeengine` to install the `edgeengine` utility.
+Run `brew tap stackpath/stackpath` to install the tap, then run `brew install sp-serverless`
+to install the `sp-serverless` utility.
 
 ## Setting authentication details
 
-The CLI saves your authentication data in a file in your home directory (`~/.stackpath/credentials`). Once you have set this up, the CLI will continue to read the credentials from the file, meaning that you don't have to provide your credentials over and over again.
+The CLI saves your authentication data in a file in your home directory
+(`~/.stackpath/credentials`). Once you have set this up, the CLI will continue
+to read the credentials from the file, meaning that you don't have to provide
+your credentials over and over again.
 
-In order to authenticate yourself, you need a client ID and a client secret. You can find them in [the StackPath client portal](https://control.stackpath.com/api-management).
+In order to authenticate yourself, you need a client ID and a client secret. You
+can find them in [the StackPath client portal](https://control.stackpath.com/api-management).
 
 ### Authenticating in an interactive environment (e.g. on your local machine)
 
-> 👉 To authenticate in an interactive environment you can simply run `edgeengine auth`. The CLI will prompt you for required details.
+> 👉 To authenticate in an interactive environment you can simply run `sp-serverless auth`. The CLI will prompt you for required details.
 
 ### Authenticating in a **non**-interactive environment (e.g. in a CI/CD pipeline)
 
-Are you integrating the CLI with a non-interactive environment? Then provide the client ID and the client secret as flags of the command. For example:
+Are you integrating the CLI with a non-interactive environment? Then provide the
+client ID and the client secret as flags of the command. For example:
 
-`edgeengine auth --client_id example-client-id --client_secret example-client-secret --force`
+```bash
+sp-serverless auth --client_id example-client-id --client_secret example-client-secret --force
+```
 
-Use the `--force` (or `-f`) flag so that the credentials file is always overwritten, even if it already exists.
+Use the `--force` (or `-f`) flag so that the credentials file is always
+overwritten, even if it already exists.
 
 ## Configure project
 
-The EdgeEngine CLI works with a per-project (or per-directory) based configuration. Each project should have its own configuration file defining the scripts that apply to that project. You might use it to order scripts by website, category (such as firewalls), or otherwise.
+The serverless scripting CLI works with a per-project (or per-directory) based
+configuration. Each project should have its own configuration file defining the
+scripts that apply to that project. You might use it to order scripts by
+website, category (such as firewalls), or otherwise.
 
-Start by including a `edgeengine.json`-file in your project directory. The required contents can be found below 👇.
+Start by including a `sp-serverless.json`-file in your project directory. The
+required contents can be found below 👇.
 
-### edgeengine.json configuration file
+### stackpath-serverless.json configuration file
 
-When deploying (`edgeengine deploy`), the CLI tries to find the `edgeengine.json` configuration file in the directory you're running the command from. Through this file you can configure which scripts you'd like to deploy to which site.
+When deploying (`sp-serverless deploy`), the CLI tries to find the `sp-serverless.json`
+configuration file in the directory you're running the command from. Through
+this file you can configure which scripts you'd like to deploy to which site.
 
 Here's an example:
 
@@ -76,7 +104,7 @@ Here's an example:
       "paths": [
         "admin/*"
       ],
-      "file": "edgeengine_scripts/ip-firewall.js",
+      "file": "serverless_scripts/ip-firewall.js",
       // The ID is generated on first deploy, or - optionally - you can configure it yourself.
       "id": "dcdf7824-b6bd-42b8-9b16-9235eefd583d"
     },
@@ -85,7 +113,7 @@ Here's an example:
       "paths": [
         "demo/*"
       ],
-      "file": "edgeengine_scripts/demo.js",
+      "file": "serverless_scripts/demo.js",
       "site_id": "15ece821-9eed-4590-9577-b83beda947f7"
     },
     {
@@ -93,7 +121,7 @@ Here's an example:
       "paths": [
         "demo/*"
       ],
-      "file": "edgeengine_scripts/demo.js",
+      "file": "serverless_scripts/demo.js",
       "site_id": "15ece821-9eed-4590-9577-b83beda947f7",
       "stack_id": "7be2de57-d6d9-4c27-8361-aef01e1870f0"
     }
@@ -105,44 +133,52 @@ Here's an example:
 
 ### Overview of all configuration parameters
 
-| Key                | Description                                                                                                                                                                         |
-| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `stack_id`         | The ID of the stack where your site is in.                                                                                                                                          |
-| `site_id`          | The ID of the site you'd like to apply the scripts to.                                                                                                                              |
-| `scripts[name]`    | The name of the script. Should be descriptive and unique to each site.                                                                                                              |
-| `scripts[paths][]` | The paths the script should apply to. Relative to your site. **Without starting `/`**. If you'd like to apply the script to `http://site.com/admin/*` you'd use the `admin/*` path. |
-| `scripts[file]`    | The file where the required JS is in. Define the path relative to the EdgeEngine configuration JSON. Without a starting `/`.                                                        |
-| `scripts[id]`      | The ID of the script in the EdgeEngine. Will be created after first deploy. Should be checked into version control after being created.                                             |
+| Key                | Description                                                                                                                                                                            |
+| ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `stack_id`         | The ID of the stack where your site is in.                                                                                                                                             |
+| `site_id`          | The ID of the site you'd like to apply the scripts to.                                                                                                                                 |
+| `scripts[name]`    | The name of the script. This should be descriptive and unique to each site.                                                                                                            |
+| `scripts[paths][]` | The paths the script should apply to. Relative to your site. **Without starting `/`**. If you'd like to apply the script to `http://example.org/admin/*` you'd use the `admin/*` path. |
+| `scripts[file]`    | The file where the required JS is in. Define the path relative to the serverless configuration JSON. Without a starting `/`.                                                           |
+| `scripts[id]`      | The ID of the script in the serverless scripting platform. Will be created after first deploy. Should be checked into version control after being created.                             |
 
 ### Where to find the stack and site ID?
 
-You can find the stack and site ID in the URL when you're logged into the StackPath client portal and have selected the CDN site you'd like to deploy scripts to. See the illustration below for more information on which IDs to copy.
+You can find the stack and site ID in the URL when you're logged into the
+StackPath client portal and have selected the CDN site you'd like to deploy
+scripts to. See the illustration below for more information on which IDs to copy.
 
 ![How to find the IDs in the URL](https://cdn.developer.stackpath.com/assets/github.com/stackpath/edgeengine-cli/README.md/finding-stack-and-site-id.png)
 
 ## Deploying with the CLI
 
-When talking about deploying in the context of the EdgeEngine we mean getting local code onto the StackPath Edge. You might also call it "updating" or "pushing" code.
+When talking about deploying in the context of the serverless scripting platform
+we mean getting local code onto the StackPath Edge. You might also call it
+"updating" or "pushing" code.
 
-> 👉 Deploying is as easy as running `edgeengine deploy` from your project directory (given it has the `edgeengine.json`-file).
+> 👉 Deploying is as easy as running `sp-serverless deploy` from your project directory (given it has the `sp-serverless.json`-file).
 
 ### Deploying from a non-interactive environment
 
-During the deployment the CLI might prompt you in certain situations. For example, when your `edgeengine.json` holds an ID that can not be found in the EdgeEngine. The CLI will then prompt you if you'd like to re-create the script. In non-interactive environments you can use the `--force` or `-f` flag to always try to re-create the script.
+During the deployment the CLI might prompt you in certain situations. For
+example, when your `sp-serverless.json` holds an ID that can not be found in the
+platform. The CLI will then prompt you if you'd like to re-create the script. In
+non-interactive environments you can use the `--force` or `-f` flag to always
+try to re-create the script.
 
 # Usage
 
 <!-- usage -->
 
 ```sh-session
-$ npm install -g @stackpath/edgeengine-cli
-$ edgeengine COMMAND
+$ npm install -g @stackpath/serverless-scripting-cli
+$ sp-serverless COMMAND
 running command...
-$ edgeengine (-v|--version|version)
-@stackpath/edgeengine-cli/1.0.1 darwin-x64 node-v10.15.0
-$ edgeengine --help [COMMAND]
+$ sp-serverless (-v|--version|version)
+@stackpath/serverless-scripting-cli/2.0.0 darwin-x64 node-v10.15.0
+$ sp-serverless --help [COMMAND]
 USAGE
-  $ edgeengine COMMAND
+  $ sp-serverless COMMAND
 ...
 ```
 
@@ -152,17 +188,17 @@ USAGE
 
 <!-- commands -->
 
-- [`edgeengine auth`](#edgeengine-auth)
-- [`edgeengine deploy`](#edgeengine-deploy)
-- [`edgeengine help [COMMAND]`](#edgeengine-help-command)
+- [`sp-serverless auth`](#sp-serverless-auth)
+- [`sp-serverless deploy`](#sp-serverless-deploy)
+- [`sp-serverless help [COMMAND]`](#sp-serverless-help-command)
 
-## `edgeengine auth`
+## `sp-serverless auth`
 
 Configures StackPath's authentication details.
 
 ```
 USAGE
-  $ edgeengine auth
+  $ sp-serverless auth
 
 OPTIONS
   -c, --client_id=client_id          StackPath Client ID used to authenticate with
@@ -172,18 +208,19 @@ OPTIONS
   -v, --verbose                      Turns on verbose logging. Defaults to false
 
 EXAMPLE
-  $ edgeengine auth
+  $ sp-serverless auth
 ```
 
-_See code: [src/commands/auth.ts](https://github.com/stackpath/edgeengine-cli/blob/master/src/commands/auth.ts)_
+_See code: [src/commands/auth.ts](https://github.com/stackpath/serverless-scripting-cli/blob/master/src/commands/auth.ts)_
 
-## `edgeengine deploy`
+## `sp-serverless deploy`
 
-Deploys the scripts in the working directory according to its edgeengine.json configuration file.
+Deploys the scripts in the working directory according to its `sp-serverless.json`
+configuration file.
 
 ```
 USAGE
-  $ edgeengine deploy
+  $ sp-serverless deploy
 
 OPTIONS
   -f, --force    Force recreation of scripts if they do not exist. Defaults to false
@@ -191,18 +228,18 @@ OPTIONS
   -v, --verbose  Turns on verbose logging. Defaults to false
 
 EXAMPLE
-  $ edgeengine deploy
+  $ sp-serverless deploy
 ```
 
-_See code: [src/commands/deploy.ts](https://github.com/stackpath/edgeengine-cli/blob/master/src/commands/deploy.ts)_
+_See code: [src/commands/deploy.ts](https://github.com/stackpath/serverless-scripting-cli/blob/master/src/commands/deploy.ts)_
 
-## `edgeengine help [COMMAND]`
+## `sp-serverless help [COMMAND]`
 
-display help for edgeengine
+Display usage information.
 
 ```
 USAGE
-  $ edgeengine help [COMMAND]
+  $ sp-serverless help [COMMAND]
 
 ARGUMENTS
   COMMAND  command to show help for
@@ -217,4 +254,6 @@ _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v2.1.4
 
 # Contributing
 
-We welcome contributions and pull requests to this plugin. See our [contributing guide](https://github.com/stackpath/edgeengine-cli/blob/master/.github/contributing.md) for more information.
+We welcome contributions and pull requests to this plugin. See our
+[contributing guide](https://github.com/stackpath/serverless-scripting-cli/blob/master/.github/contributing.md)
+for more information.

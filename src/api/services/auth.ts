@@ -23,7 +23,7 @@ export function getCredentials(): ICredentials {
     );
   } catch (err) {
     throw new Error(
-      "The StackPath CLI credentials file does not exist yet. Run `edgeengine auth` to create this."
+      "The StackPath CLI credentials file does not exist yet. Run `sp-serverless auth` to create this."
     );
   }
 
