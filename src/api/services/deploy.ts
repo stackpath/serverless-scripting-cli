@@ -7,20 +7,27 @@ import * as Http from "./http";
 import * as Log from "./log";
 import { continueOnErrorPrompt } from "./prompt";
 
+export interface DeployOptions {
+  force: boolean;
+  only?: string[];
+}
+
 /*
  * Class performing all Deploy tasks.
  */
 export class Deploy {
   private configuration!: IConfiguration;
   private force!: boolean;
+  private only: string[] = [];
 
   /**
    * Deploy all scripts in the configuration file.
    * @param {{ force: boolean }} [options] - The options object.
    */
-  public async deployScripts(options?: { force: boolean }) {
+  public async deployScripts(options?: DeployOptions) {
     if (options) {
       this.force = options.force || false;
+      this.only = options.only || [];
     }
 
     const workingDirectory = process.cwd();
@@ -56,7 +63,11 @@ export class Deploy {
       for (let i = 0; i < this.configuration.scripts.length; i++) {
         try {
           const script = this.configuration.scripts[i];
-          await this.handleScriptUpload(script, i);
+          if (this.only.length === 0 || this.only.indexOf(script.name) >= 0) {
+            await this.handleScriptUpload(script, i);
+          } else {
+            Log.logVerbose(`Skipping script ${script.name}.`);
+          }
         } catch (e) {
           // Check if user wants to try to update subsequent scripts after an error
           await continueOnErrorPrompt(e);
