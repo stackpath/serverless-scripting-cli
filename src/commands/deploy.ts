@@ -48,6 +48,9 @@ export default class Deploy extends Command {
     if (!!this.parsedFlags && this.parsedFlags.force) {
       process.env.STACKPATH_FORCE = this.parsedFlags.force;
     }
+    if (!!this.parsedFlags && this.parsedFlags.force) {
+      process.env.STACKPATH_ONLY = this.parsedFlags.only;
+    }
 
     Log.logVerbose(`Checking if access token expired?`);
 
@@ -66,7 +69,11 @@ export default class Deploy extends Command {
     const deploy = new DeployService();
     try {
       await deploy.deployScripts({
-        force: Boolean(process.env.STACKPATH_FORCE)
+        force: Boolean(process.env.STACKPATH_FORCE),
+        only:
+          typeof process.env.STACKPATH_ONLY === "string"
+            ? process.env.STACKPATH_ONLY.split(",")
+            : undefined
       });
     } catch (e) {
       cliUx.log(e.message);
