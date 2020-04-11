@@ -184,7 +184,7 @@ export class Deploy {
   /**
    * Update the id of the script into the configuration object.
    * @param {IConfigurationScript} script - The script that needs to be updated.
-   * @param {Response} response - The response that contains the (new) id.
+   * @param {string} scriptId - The new script ID.
    * @param {number} index - The index of the script.
    */
   private async updateScriptIdInConfig(

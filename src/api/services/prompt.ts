@@ -2,7 +2,7 @@ import cliUx from "cli-ux";
 
 /**
  * Prompts the user if they want to continue or not after an error.
- * @param {string} log - The string that needs to be logged to the output.
+ * @param {any} e - The item to log to the output.
  */
 export async function continueOnErrorPrompt(e: any) {
   if (!process.env.STACKPATH_FORCE) {

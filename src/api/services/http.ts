@@ -9,7 +9,6 @@ import * as Log from "./log";
  * @param {string} method The http method used to perform the call
  * @param {string} resource - The endpoint relative to the hostname, be sure to prefix with a forward slash '/'.
  * @param [body] - The optional payload that will be sent to the server.
- * @param {boolean} throwErrors - If false, handle the error yourself, timeout errors will still be thrown. Defaults to true.
  * @returns {Promise<Response>} - The response of the server.
  */
 export async function request(
