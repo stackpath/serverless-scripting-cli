@@ -1,7 +1,7 @@
 {
   "name": "@stackpath/serverless-scripting-cli",
   "description": "Deploy to StackPath's serverless scripting platform from your local machine.",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "author": "The StackPath Development Team <developers@stackpath.com>",
   "bin": {
     "sp-serverless": "./bin/run"

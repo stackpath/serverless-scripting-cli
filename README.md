@@ -210,8 +210,9 @@ COMMANDS
 
 # Development
 
-The CLI doesn't have any build commands. Make code changes and run `yaen test` to
-run the test suite or `bin/run` to test changes directly.
+Development requires nodejs versions 10 and up. The CLI doesn't have any build
+commands. Make code changes and run `yarn test` to run the test suite or
+`bin/run` to test changes directly.
 
 We welcome contributions and pull requests. See our
 [contributing guide](https://github.com/stackpath/serverless-scripting-cli/blob/master/.github/contributing.md)
