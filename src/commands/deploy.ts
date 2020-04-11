@@ -29,6 +29,12 @@ export default class Deploy extends Command {
       description:
         "Force recreation of scripts if they do not exist. Defaults to false",
       default: false
+    }),
+    only: flags.string({
+      char: "o",
+      description:
+        'Only deploy the following script named scripts. Comma separated value of script names. Defaults to ""',
+      default: ""
     })
   };
 
@@ -48,7 +54,7 @@ export default class Deploy extends Command {
     if (!!this.parsedFlags && this.parsedFlags.force) {
       process.env.STACKPATH_FORCE = this.parsedFlags.force;
     }
-    if (!!this.parsedFlags && this.parsedFlags.force) {
+    if (!!this.parsedFlags && this.parsedFlags.only) {
       process.env.STACKPATH_ONLY = this.parsedFlags.only;
     }
 

@@ -223,9 +223,10 @@ USAGE
   $ sp-serverless deploy
 
 OPTIONS
-  -f, --force    Force recreation of scripts if they do not exist. Defaults to false
-  -h, --help     show CLI help
-  -v, --verbose  Turns on verbose logging. Defaults to false
+  -f, --force      Force recreation of scripts if they do not exist. Defaults to false
+  -h, --help       show CLI help
+  -o, --only=only  Only deploy the following script named scripts. Comma separated value of script names. Defaults to ""
+  -v, --verbose    Turns on verbose logging. Defaults to false
 
 EXAMPLE
   $ sp-serverless deploy

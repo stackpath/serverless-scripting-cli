@@ -29,7 +29,7 @@ export default class Auth extends Command {
     force: flags.boolean({
       char: "f",
       description:
-        "Set this to always overwrite current credential file, defaults to false.",
+        "Set this to always overwrite current credential file. Defaults to false",
       default: false
     }),
     help: flags.help({ char: "h" }),
