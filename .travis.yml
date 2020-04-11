@@ -1,16 +1,9 @@
 language: node_js
 node_js:
-  - "8"
-  - "9"
   - "10"
   - "11"
   - "12"
   - "13"
-
-matrix:
-  allow_failures:
-    # get-caller-file@2.0.5 is incompatible with node 9
-    - node_js: "9"
 
 script:
   - yarn lint
