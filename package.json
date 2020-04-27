@@ -45,10 +45,14 @@
     "node": ">=8.0.0"
   },
   "files": [
-    "/bin",
-    "/lib",
-    "/npm-shrinkwrap.json",
-    "/oclif.manifest.json"
+    "bin",
+    "lib",
+    "CODE_OF_CONDUCT.md",
+    "LICENSE.md",
+    "README.md",
+    "npm-shrinkwrap.json",
+    "oclif.manifest.json",
+    "package.json"
   ],
   "homepage": "https://github.com/stackpath/serverless-scripting-cli",
   "keywords": [
@@ -71,7 +75,7 @@
     "generate:doc": "typedoc --out dist/docs src/ --mode modules",
     "lint": "tslint -p . -c tslint.json 'src/**/*.ts'",
     "postpack": "rm -f oclif.manifest.json",
-    "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
+    "prepack": "rm -rf lib && rm -rf tsconfig.tsbuildinfo && tsc -b && oclif-dev manifest && oclif-dev readme",
     "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",
     "version": "oclif-dev readme && git add README.md"
   },
