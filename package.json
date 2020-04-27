@@ -48,11 +48,8 @@
     "bin",
     "lib",
     "CODE_OF_CONDUCT.md",
-    "LICENSE.md",
-    "README.md",
     "npm-shrinkwrap.json",
-    "oclif.manifest.json",
-    "package.json"
+    "oclif.manifest.json"
   ],
   "homepage": "https://github.com/stackpath/serverless-scripting-cli",
   "keywords": [
